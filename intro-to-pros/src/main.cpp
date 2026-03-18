@@ -7,18 +7,20 @@ pros::Motor frontRight(4, pros::E_MOTOR_GEAR_BLUE, false);
 pros::Motor middleRight(5, pros::E_MOTOR_GEAR_BLUE, false);
 pros::Motor backRight(6, pros::E_MOTOR_GEAR_BLUE, false);
 
-pros::Motor_Group left_motors({
+pros::Motor_Group leftMotors({
 	frontLeft,
 	middleLeft,
 	backLeft
 });
 
-pros::Motor_Group right_motors({
+pros::Motor_Group rightMotors({
 	frontRight,
 	middleRight,
 	backRight
 });
 
+pros::Distance leftDist(9);
+pros::Distance rightDist(10);
 
 		/**
 
@@ -81,31 +83,26 @@ void autonomous() {}
  */
 void opcontrol()
 {
-	// pros::Controller master(pros::E_CONTROLLER_MASTER);
-	// pros::Motor left_mtr(1);
-	// pros::Motor right_mtr(2);
-
-	// while (true) {
-	// 	pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-	// 	                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-	// 	                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-	// 	int left = master.get_analog(ANALOG_LEFT_Y);
-	// 	int right = master.get_analog(ANALOG_RIGHT_Y);
-
-	// 	left_mtr = left;
-	// 	right_mtr = right;
-
-	// 	pros::delay(20);
-	// }
 
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-	std::cout << master.get_battery_level() << std::endl;
+	// std::cout << master.get_battery_level() << std::endl;
+	std::cout << "left_dist,right_dist" << std::endl;
+
+	int leftDistance = 0;
+	int rightDistance = 0;
 
 	while (true)
 	{
-		left_motors = master.get_analog(ANALOG_LEFT_Y);
-		right_motors = master.get_analog(ANALOG_RIGHT_Y);
-		pros::delay(20);
+		leftMotors = master.get_analog(ANALOG_LEFT_Y);
+		rightMotors = master.get_analog(ANALOG_RIGHT_Y);
+
+		leftDistance = leftDist.get();
+		rightDistance = rightDist.get();
+		
+		std::cout << leftDistance << ",";
+		std::cout << rightDistance << std::endl;
+
+		pros::delay(100);
 	}
 }

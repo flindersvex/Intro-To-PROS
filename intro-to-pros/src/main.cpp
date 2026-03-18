@@ -29,8 +29,7 @@ pros::Distance rightDist(10); // The only argument is the port number
 	 * All other competition modes are blocked by initialize; it is recommended
 	 * to keep execution time for this mode under a few seconds.
 	 */
-void initialize()
-{
+void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
@@ -81,8 +80,7 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-void opcontrol()
-{
+void opcontrol() {
 
 	pros::Controller master(pros::E_CONTROLLER_MASTER); // This initialises the controller, so we can get button and analog stick readings from it
 
@@ -92,8 +90,7 @@ void opcontrol()
 	int leftDistance = 0; // These variables will store the distance sensor readings, which are updated in the loop below and printed to the console.
 	int rightDistance = 0;
 
-	while (true)
-	{
+	while (true) {
 		leftMotors = master.get_analog(ANALOG_LEFT_Y); // This line sets the voltage of the left motors to the value of the left analog stick on the controller, which is a value from -127 to 127. This allows you to control the robot's movement with the controller.
 		rightMotors = master.get_analog(ANALOG_RIGHT_Y); // The right motors are set to the right analog stick in the same way.
 
